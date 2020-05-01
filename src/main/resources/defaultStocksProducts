@@ -1,0 +1,46 @@
+{"c1" : [
+    {
+      "name" : "A",
+      "weight" : "3"
+    },
+    {
+      "name" : "B",
+      "weight" : "2"
+    },
+    {
+      "name" : "C",
+      "weight" : "8"
+    }
+  ],
+
+    "c2" : [
+      {
+        "name" : "D",
+        "weight" : "12"
+      },
+      {
+        "name" : "E",
+        "weight" : "25"
+      },
+      {
+        "name" : "F",
+        "weight" : "15"
+      }
+
+    ],
+    "c3" : [
+      {
+        "name" : "G",
+        "weight" : "0.5"
+      },
+      {
+        "name" : "H",
+        "weight" : "1"
+      },
+      {
+        "name" : "I",
+        "weight" : "2"
+      }
+
+    ]
+}

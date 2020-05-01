@@ -1,0 +1,55 @@
+{
+  "centers" : [{"c1" : [
+    {
+      "neighbour": "l1",
+      "units": "3"
+    },
+    {
+      "neighbour": "c2",
+      "units": "4"
+    }
+  ]},
+
+    {"c2": [
+    {
+      "neighbour": "l1",
+      "units": "2.5"
+    },
+    {
+      "neighbour": "c1",
+      "units": "4"
+    },
+    {
+      "neighbour": "c3",
+      "units": "3"
+    }
+  ]},
+    {"c3": [
+    {
+      "neighbour": "l1",
+      "units": "2"
+    },
+    {
+      "neighbour": "c2",
+      "units": "3"
+    }
+  ]},
+    {
+      "l1": [
+        {
+          "neighbour": "c1",
+          "units": "3"
+        },
+        {
+          "neighbour": "c2",
+          "units": "2.5"
+        },
+        {
+          "neighbour": "c3",
+          "units": "2"
+        }
+      ]
+    }
+    ],
+  "dropLocationName" : "l1"
+}
