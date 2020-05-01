@@ -1,12 +1,12 @@
 # DeliverySystem
 
-##start the server
+## start the server
 ```shell
 mvn package
 sh target/bin/webapp
 ```
 
-##API Description
+## API Description
 The API url is "localhost:8080/deliver".
 
 The end point is available with GET and POST request.
@@ -22,7 +22,7 @@ and "centersPath" which is the absolute path of the json file containing the cen
 
 >Example : localhost:8080/deliver?stocksProductsPath=/mnt/01D43FA6387D16F0/DeliverySystem/src/main/resources/defaultStocksProducts&centersPath=/mnt/01D43FA6387D16F0/DeliverySystem/src/main/resources/defaultCenters
 
-##Assumptions and Notes
+## Assumptions and Notes
 
 - The GET request's "order" param must be in the next format
 
