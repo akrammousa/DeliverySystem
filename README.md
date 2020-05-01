@@ -147,3 +147,5 @@ which is same as the given in the task doc.
 ```
 
 - Products Names and Center Names are not case sensitive.
+
+- The weights of the products are KGs units.
