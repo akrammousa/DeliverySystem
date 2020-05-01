@@ -28,9 +28,9 @@ public class SystemCreator {
             for (Object product: products) {
                 JSONObject productJSON = (JSONObject) product;
                 Product newProduct = new Product();
-                newProduct.name = (String) productJSON.get("name");
+                newProduct.name = ((String) productJSON.get("name")).toLowerCase();
                 newProduct.weight = Float.valueOf(productJSON.get("weight").toString());
-                newProduct.center = center.toString();
+                newProduct.center = center.toString().toLowerCase();
                 stocksMap.put(newProduct.name , newProduct);
             }
         }
@@ -55,7 +55,7 @@ public class SystemCreator {
                 centersMap.putIfAbsent((String) ((JSONObject) center).keySet().toArray()[0], newCenter);
             }
             String centerName = (String) ((JSONObject) center).keySet().toArray()[0];
-            newCenter.name = centerName;
+            newCenter.name = centerName.toLowerCase();
             JSONArray edges = (JSONArray) centerJson.get(centerName);
             for (Object edge: edges) {
                 JSONObject edgeJSON = (JSONObject) edge;
@@ -63,14 +63,14 @@ public class SystemCreator {
                 newEdge.units = Float.valueOf((String) edgeJSON.get("units"));
                 centersMap.computeIfAbsent((String) edgeJSON.get("neighbour") , c->{
                     Center centerObject = new Center();
-                    centerObject.name = (String) edgeJSON.get("neighbour");
+                    centerObject.name = ((String) edgeJSON.get("neighbour")).toLowerCase();
                     return centerObject;
                 });
-                newEdge.neighbour = centersMap.get((String) edgeJSON.get("neighbour"));
-                centersMap.get(centerName).neighbours.put((String) edgeJSON.get("neighbour"),newEdge);
+                newEdge.neighbour = centersMap.get((String) ((String) edgeJSON.get("neighbour")).toLowerCase());
+                centersMap.get(centerName).neighbours.put((String) ((String) edgeJSON.get("neighbour")).toLowerCase(),newEdge);
             }
         }
-        String dropLocationName = (String) object.get("dropLocationName");
+        String dropLocationName = ((String) object.get("dropLocationName")).toLowerCase();
         return new CreateCentersResponse(dropLocationName , centersMap);
     }
 }

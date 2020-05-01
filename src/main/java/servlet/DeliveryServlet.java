@@ -32,7 +32,7 @@ public class DeliveryServlet extends HttpServlet {
         }
         order = order.replaceAll("\\s", "");
         MinCostComputer minCostComputer = new MinCostComputer();
-        int minCost = minCostComputer.getMinCost(centersMap,stocksMap, order,dropLocationName);
+        float minCost = minCostComputer.getMinCost(centersMap,stocksMap, order,dropLocationName);
 
         response.getOutputStream().print("min cost = " + minCost);
     }

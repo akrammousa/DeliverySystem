@@ -12,8 +12,8 @@ public class MinCostComputer {
     private static final int FIRST_FIVE_KGS_COST_PER_UNIT = 10;
     private static final int ADDITIONAL_FIVE_KGS_COST_PER_UNIT = 8;
 
-    public int getMinCost(Map<String , Center> centersMap , Map<String , Product> productsMap , String order , String dropLocationName){
-        String[] orderSplitted = order.split(",");
+    public float getMinCost(Map<String , Center> centersMap , Map<String , Product> productsMap , String order , String dropLocationName){
+        String[] orderSplitted = order.toLowerCase().split(",");
         if (orderSplitted.length == 0)
             return -1;
         OrderInfo orderInfo = new OrderInfo();
@@ -39,8 +39,8 @@ public class MinCostComputer {
         if (currentCenter.name.equalsIgnoreCase(destinationCenter.name)){
             return;
         }
-        int pathCostThroughDropCenter = getPathCostThroughDropCenter(dropLocationName , currentCenter , centersGraph, destinationCenter, orderInfo.currentWeight);
-        int pathCostThroughStockCenters = getPathCostThroughStockCenters(dropLocationName,currentCenter , centersGraph , destinationCenter , orderInfo.currentWeight , new HashSet<String>(Arrays.asList(orderSplitted[orderSplittedIndex])), 0);
+        float pathCostThroughDropCenter = getPathCostThroughDropCenter(dropLocationName , currentCenter , centersGraph, destinationCenter, orderInfo.currentWeight);
+        float pathCostThroughStockCenters = getPathCostThroughStockCenters(dropLocationName,currentCenter , centersGraph , destinationCenter , orderInfo.currentWeight , new HashSet<String>(Arrays.asList(orderSplitted[orderSplittedIndex])), 0);
 
         if (pathCostThroughStockCenters >= pathCostThroughDropCenter){
             orderInfo.currentWeight = 0;
@@ -50,19 +50,19 @@ public class MinCostComputer {
             orderInfo.currentCost+= pathCostThroughStockCenters;
 
     }
-    private int getPathCostThroughDropCenter(String dropLocationName, Center startCenter, Map<String, Center> centersGraph, Center destinationCenter, float currentWeight) {
-        int cost = 0;
+    private float getPathCostThroughDropCenter(String dropLocationName, Center startCenter, Map<String, Center> centersGraph, Center destinationCenter, float currentWeight) {
+        float cost = 0;
         cost += getPathCost(currentWeight , startCenter.neighbours.get(dropLocationName));
         cost += getPathCost(0 , centersGraph.get(dropLocationName).neighbours.get(destinationCenter.name));
         return cost;
     }
 
-    private int getPathCostThroughStockCenters(String dropLocationName , Center currentCenter, Map<String, Center> centersGraph, Center destination, float currentWeight, HashSet<String> visited, int currentCost) {
+    private float getPathCostThroughStockCenters(String dropLocationName , Center currentCenter, Map<String, Center> centersGraph, Center destination, float currentWeight, HashSet<String> visited, float currentCost) {
         if (currentCenter.name.equalsIgnoreCase(destination.name)){
             return currentCost;
         }
         Map<String , Edge> neighbours = currentCenter.neighbours;
-        int minCost = Integer.MAX_VALUE;
+        float minCost = Integer.MAX_VALUE;
 
         for (Edge edge: neighbours.values()) {
             if (!visited.contains(edge.neighbour.name) && !edge.neighbour.name.equalsIgnoreCase(dropLocationName)){
@@ -73,12 +73,12 @@ public class MinCostComputer {
         }
         return minCost;
     }
-    private int getPathCost(float currentWeight, Edge edge) {
+    private float getPathCost(float currentWeight, Edge edge) {
         if (currentWeight <=5){
             return (int) (FIRST_FIVE_KGS_COST_PER_UNIT * edge.units);
         }
         int parts = (int) (currentWeight / 5);
-        int cost = 0;
+        float cost = 0;
         if (currentWeight % 5 > 0){
             cost = (int) ((FIRST_FIVE_KGS_COST_PER_UNIT * edge.units) + (ADDITIONAL_FIVE_KGS_COST_PER_UNIT * edge.units) * parts);
         }
